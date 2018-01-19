@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router, Event, NavigationEnd } from '@angular/router';
+import { TabsRouting } from './routing-tabs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  mainTitle = "MAIN TITLE";
+  subTitle = "THIS IS A SUBTITLE";
 }

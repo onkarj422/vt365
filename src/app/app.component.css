@@ -1,0 +1,36 @@
+.toolbar-banner {
+  background-color: #1976D2;
+  height: 200px;
+}
+
+.mat-display-4 {
+  font-size: 60px;
+  font-weight: 100;
+  color: white;
+  opacity: 0.9;
+}
+
+.mat-display-3 {
+  font-size: 20px;
+  font-weight: 100;
+  color: white;
+  opacity: 0.9;
+}
+
+.toolbar-tabs {
+  background-color: #1565C0;
+  padding: 0;
+  height: 50px;
+}
+
+.router-outlet {
+  margin: 20px 0;
+}
+
+.toolbar-footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #212121;
+  height: 150px;
+}
