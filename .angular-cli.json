@@ -22,7 +22,7 @@
         "styles.css",
         "theme.scss"
       ],
-      "scripts": [],
+      "scripts": [ "../node_modules/jquery/dist/jquery.min.js" ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

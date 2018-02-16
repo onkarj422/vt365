@@ -1,0 +1,35 @@
+<div fxLayout="column" fxLayoutAlign="center center" style="height: 700px; background-color: #35454D;">
+  <mat-card class="login-container mat-elevation-z6" id="login-card" style="width: 300px; margin: auto auto;">
+    <mat-card-header>
+      <h1 style="font-size: 20px; color: whitesmoke;" mat-card-title>
+        Sign In
+      </h1>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form">
+        <mat-form-field style="width: 100%;">
+          <input name="email" matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="form.controls.email.errors?.email && !form.controls.email.errors?.password">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="form.controls.email.errors?.required">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field style="width: 100%;">
+          <input name="password" matInput placeholder="Enter your password" formControlName="password" [type]="hide ? 'password' : 'text'">
+          <mat-error *ngIf="form.controls.password.errors?.required">
+            Password is <strong>required</strong>
+          </mat-error>
+          <mat-icon style="color: whitesmoke;" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <button mat-raised-button style="color: white; background-color: #2fb0ea; width: 100%;" (click)="login()">Login</button>
+    <div style="height: 10px;"></div>
+    <div fxLayout="row" fxLayoutGap="5px">
+      <button mat-raised-button style="color: white; background-color: #3B5998; width: 50%;"><i class="fa fa-facebook left"></i> Facebook</button>
+      <button mat-raised-button style="color: white; background-color: #DD4B39; width: 50%;"><i class="fa fa-google-plus left"></i> Google +</button>
+    </div>
+  </mat-card>
+</div>

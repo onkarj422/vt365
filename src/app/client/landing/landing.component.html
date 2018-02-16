@@ -1,0 +1,38 @@
+<mat-toolbar class="banner">
+	<p class="h1 mat-display-4">Start your workout<br>right now!</p>
+	<a class="smooth-goto" [ngx-scroll-to]="'#misc'"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+</mat-toolbar>
+<div id="misc" class="stepper-container">
+	<mat-horizontal-stepper class="stepper" [linear]="isLinear" #stepper="matHorizontalStepper">
+		<mat-step [stepControl]="firstStep">
+			<ng-template matStepLabel>Choose Training Type(s)</ng-template>
+			<div fxLayout="row" fxLayoutAlign="center center" fxLayoutWrap="wrap" fxLayoutGap="10px">
+				<mat-card style="cursor: pointer;" (click)="isClicked[i] = !isClicked[i];" fxFlex *ngFor="let slide of slides;let i =index" [class.isSelected]="isClicked[i]">
+                    <mat-card-header>
+                    	<mat-card-title><p class="mat-title">{{slide.title}}</p></mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image src="{{slide.img}}">
+                    <mat-card-actions>
+                    	<button style="color: #2fb0ea;" (click)="isClicked[i] = !isClicked[i];" mat-button>SELECT</button>
+                    </mat-card-actions>
+                </mat-card>
+			</div>
+			<div style="height: 50px;"></div>
+			<button (click)="selectTraining()" style="float: right; background-color: #2fb0ea;" mat-button matStepperNext>Next</button>
+		</mat-step>
+		<mat-step [stepControl]="secondStep">
+			<ng-template matStepLabel>Choose Trainer</ng-template>
+			<div>
+				
+			</div>
+			<button mat-button matStepperNext>Next</button>
+		</mat-step>
+		<mat-step [stepControl]="thirdStep">
+			<ng-template matStepLabel>Subscription & Payment</ng-template>
+			<div>
+				
+			</div>
+			
+		</mat-step>
+	</mat-horizontal-stepper>
+</div>

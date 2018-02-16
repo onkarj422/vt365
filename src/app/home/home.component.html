@@ -1,3 +1,103 @@
-<mat-card fxFlexOffset="10%" fxFlexOffset.xs="4%" fxFlex="80%" fxFlex.xs="92%" style="height: 800px;">
-  
-</mat-card>
+<div>
+	<mat-toolbar fxLayout="column" fxLayoutAlign="center start" class="toolbar-banner mat-elevation-z4">
+	<div style="margin-left: 70px;" fxLayout="column" fxLayoutGap="5px">
+		<p class="h1 mat-display-4">{{mainTitle}}</p>
+		<p class="h2 mat-display-1">{{subTitle}}</p>
+		<div style="height: 60px;"></div>
+		<div class="get-started-button">
+			<a href="/register#client"><button class="cta-register-button" mat-button color="warn">GET STARTED!!</button></a>
+		</div>
+	</div>
+	</mat-toolbar>
+	<div fxLayout="row">
+		<a (click)="toClient()" class="volt-container-client">
+			<img class="volt-img-client" src="./assets/client.jpg">
+			<mat-toolbar style="padding-top: 50px;" class="volt-toolbar-client mat-elevation-z2">
+			<p style="margin-left: auto;" class="volt-text mat-display-4">USER PANEL</p>
+			<i style="margin-left: auto;" class="material-icons">navigate_next</i>
+			</mat-toolbar>
+		</a>
+		<a (click)="toTrainer()" class="volt-container-trainer">
+			<img class="volt-img-trainer" src="./assets/trainer.jpg">
+			<mat-toolbar style="padding-top: 50px;" class="volt-toolbar-trainer mat-elevation-z2">
+			<p style="margin-left: auto;" class="volt-text mat-display-4">TRAINER PANEL</p>
+			<i style="margin-left: auto;" class="material-icons">navigate_next</i>
+			</mat-toolbar>
+		</a>
+	</div>
+	<div style="background: #4B4C51;">
+		<div style="height: 30px;"></div>
+		<p class="section-title mat-display-3">PICK YOUR TRAINER</p>
+		<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" class="training-card-container">
+			<mat-card class="training-card">
+				<mat-card-header>
+					<mat-card-title><p class="mat-title training-card-title">WEIGHT LOSS/GAIN</p></mat-card-title>
+				</mat-card-header>
+				<img mat-card-image class="training-card-img" src="./assets/weightloss.jpg">
+				<mat-card-content fxLayout="row" fxLayoutAlign="center center">
+					<button class="training-card-button" mat-raised-button color="warn">TRAINERS</button>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="training-card">
+				<mat-card-header>
+					<mat-card-title><p class="mat-title training-card-title">BODY TRANSFORMING</p></mat-card-title>
+				</mat-card-header>
+				<img mat-card-image class="training-card-img" src="./assets/bodytransforming.jpg">
+				<mat-card-content fxLayout="row" fxLayoutAlign="center center">
+			<button class="training-card-button" mat-raised-button color="warn">TRAINERS</button>
+			</mat-card-content>
+			</mat-card>
+			<mat-card class="training-card">
+			<mat-card-header>
+			<mat-card-title><p class="mat-title training-card-title">POWER LIFTING</p></mat-card-title>
+			</mat-card-header>
+			<img mat-card-image class="training-card-img" src="./assets/powerlifting.jpg">
+			<mat-card-content fxLayout="row" fxLayoutAlign="center center">
+			<button class="training-card-button" mat-raised-button color="warn">TRAINERS</button>
+			</mat-card-content>
+			</mat-card>
+		</div>
+		<div style="height: 20px;"></div>
+		<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" class="training-card-container">
+			<mat-card class="training-card">
+			<mat-card-header>
+			<mat-card-title><p class="mat-title training-card-title">PILATES/YOGA</p></mat-card-title>
+			</mat-card-header>
+			<img mat-card-image class="training-card-img" src="./assets/yoga.jpg">
+			<mat-card-content fxLayout="row" fxLayoutAlign="center center">
+			<button class="training-card-button" mat-raised-button color="warn">TRAINERS</button>
+			</mat-card-content>
+			</mat-card>
+			<mat-card class="training-card">
+			<mat-card-header>
+			<mat-card-title><p class="mat-title training-card-title">CROSSFIT</p></mat-card-title>
+			</mat-card-header>
+			<img mat-card-image class="training-card-img" src="./assets/crossfit.jpg">
+			<mat-card-content fxLayout="row" fxLayoutAlign="center center">
+			<button class="training-card-button" mat-raised-button color="warn">TRAINERS</button>
+			</mat-card-content>
+			</mat-card>
+			<mat-card class="training-card">
+			<mat-card-header>
+			<mat-card-title><p class="mat-title training-card-title">SPECIALITY</p></mat-card-title>
+			</mat-card-header>
+			<img mat-card-image class="training-card-img" src="./assets/speciality.jpg">
+			<mat-card-content fxLayout="row" fxLayoutAlign="center center">
+			<button class="training-card-button" mat-raised-button color="warn">TRAINERS</button>
+			</mat-card-content>
+			</mat-card>
+		</div>
+		<div style="height: 30px;"></div>
+	</div>
+	<div style="height: 40px; margin-bottom: 40px;"></div>
+	<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="30px">
+		<div class="section-title-container">
+			<p class="section-title1 mat-display-3">ARE <br>YOU A <br>FITNESS <br>TRAINER?</p>
+			<p class="section-description1 mat-body-2">If you are a fitness trainer and <br>want to get in action, you can <br>join our team of trainers. Here, you can <br>be a personal trainer for our clients.</p>
+		</div>
+		<div class="cta-button-container">
+			<a href="/register#trainer"><button class="cta-join-trainer-button" mat-button color="warn">JOIN OUR TRAINER TEAM</button></a>
+		</div>
+	</div>
+	<div style="height: 30px;"></div>
+</div>

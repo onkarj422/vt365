@@ -2,5 +2,9 @@ html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
   margin: 0;
   padding: 0;
-  background: #F5F5F5;
+  background: #EBECEF;
+}
+
+.router-toolbar-margin {
+	margin-top : 60px;
 }

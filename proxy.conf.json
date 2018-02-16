@@ -1,0 +1,5 @@
+{   "/api": {
+      "target": "http://localhost/vt365/",
+      "secure": false
+     } 
+}

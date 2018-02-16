@@ -1,21 +1,25 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { Routes, RouterModule } from '@angular/router';
+import { Component, ViewEncapsulation, Input, Inject, OnInit } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Routes, RouterModule, Router } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
+import { LoginComponent } from './login/login.component';
+import { AppComponent } from './app.component';
+import { RegisterComponent } from './register/register.component';
+import { SessionService } from './session.service';
+import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'my-tabs',
   template: `
-  <nav mat-tab-nav-bar>
-  <a mat-tab-link
-  *ngFor="let tabLink of tabLinks; let i = index"
-      [routerLink] = "tabLink.link"
-  [active] = "activeLinkIndex === i"
-    (click) = "activeLinkIndex = i" >
-  {{tabLink.label}}
-  </a>
+  <nav id="tab_nav">
+    <a class="home" routerLink="" routerLink="/home" routerLinkActive="active" mat-button>Home</a>
+    <a routerLink="/client" routerLinkActive="active" mat-button>For Clients</a>
+    <a routerLink="/trainer" routerLinkActive="active" mat-button>Trainers</a>
+    <a routerLink="/about" routerLinkActive="active" mat-button>About</a>
+    <a *ngIf="!this.session.isActive()" routerLink="/login" class="login-button" mat-button>Sign In</a>
+    <a *ngIf="this.session.isActive()" (click)="this.session.destroy()" href="/home" class="login-button mat-elevation-z4" mat-button>Sign Out</a>
   </nav>
   `,
   styleUrls: ['./tabs.component.css'],
@@ -23,17 +27,46 @@ import { ContactComponent } from './contact/contact.component';
 })
 
 export class TabsRouting {
-  activeLinkIndex = 0;
-  tabLinks: any[] = [
-    { label: "Home", link: "/home" },
-    { label: "About", link: "/about" },
-    { label: "Contact", link: "/contact" }
-  ];
+
+  constructor(private session: SessionService, private sessionStore: SessionStorageService, private router: Router) {
+  
+  }
+
+  toClient() {
+    if (this.session.isActive()) {
+      let data = this.sessionStore.retrieve('currentUserSession');
+      if (JSON.parse(data).userIs == "client") {
+        this.router.navigateByUrl('/client');
+      } else if (JSON.parse(data).userIs == "trainer") {
+        return;
+      }
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+  }
+
+  toTrainer() {
+    if (this.session.isActive()) {
+      let data = this.sessionStore.retrieve('currentUserSession');
+      if (JSON.parse(data).userIs == "trainer") {
+        this.router.navigateByUrl('/trainer');
+      } else if (JSON.parse(data).userIs == "client") {
+        return;
+      }
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+  }
+
 }
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
+  { path: 'client', loadChildren: './client/client.module#ClientModule' },
+  { path: 'trainer', loadChildren: './trainer/trainer.module#TrainerModule' },
   { path: 'about', component: AboutComponent, pathMatch: 'full' },
-  { path: 'contact', component: ContactComponent, pathMatch: 'full' }
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
+  { path: 'register', component: RegisterComponent, pathMatch: 'full' }
 ];
