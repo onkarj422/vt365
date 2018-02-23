@@ -1,3 +1,20 @@
-<p>
-  trainer works!
-</p>
+<mat-toolbar class="dashboard-title-bar mat-elevation-z3">
+	<mat-icon (click)="this.sidenav.toggle()" *ngIf="smallScreen" style="color: whitesmoke; font-size: 20px; margin-right: 20px;">menu</mat-icon>Title
+</mat-toolbar>
+<div class="layout-container">
+	<mat-sidenav-container class="sidenav-container">
+ 		<mat-sidenav mode="side" opened="isPanelOpened" class="sidenav-panel mat-elevation-z6" #sidenav>
+ 			<mat-nav-list>
+ 				<mat-list-item (click)="listClick()" [routerLink]="['/trainer/']" class="list-item"> Clients </mat-list-item>
+ 				<mat-list-item (click)="listClick()" [routerLink]="['/trainer/workouts/']" class="list-item"> Workouts </mat-list-item>
+ 				<mat-list-item (click)="listClick()" [routerLink]="['/trainer/meals/']" class="list-item"> Meal Plans </mat-list-item>
+ 				<mat-list-item (click)="listClick()" [routerLink]="['/trainer/media/']" class="list-item"> Media Library </mat-list-item>
+ 				<mat-list-item (click)="listClick()" [routerLink]="['/trainer/messages/']" class="list-item"> Messages </mat-list-item>
+ 				<mat-list-item (click)="listClick()" [routerLink]="['/trainer/payments/']" class="list-item"> Payments </mat-list-item>
+			</mat-nav-list>
+ 		</mat-sidenav>
+  		<mat-sidenav-content class="sidenav-content">
+  			<router-outlet class="router-outlet"></router-outlet>
+  		</mat-sidenav-content>
+	</mat-sidenav-container>
+</div>

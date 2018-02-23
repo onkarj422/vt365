@@ -1,0 +1,41 @@
+body {
+	background-color: #EBECEF;
+}
+
+.router-outlet {
+	background-color: #EBECEF;
+}
+
+.dashboard-title-bar {
+	background-color: #2fb0ea;
+	color: whitesmoke;
+	height: 60px;
+	margin-top: 60px;
+	position: relative;
+	z-index: 99;
+}
+
+.sidenav-panel {
+	width: 250px;
+	background-color: #2F2F2F;
+	z-index: 98; 
+}
+
+.list-item {
+	color: whitesmoke;
+	font-weight: 300;
+	text-transform: uppercase;
+}
+
+.sidenav-container {
+	height: 100%;
+}
+
+.layout-container {
+	height: 800px;
+}
+
+.sidenav-content {
+	padding: 10px;
+	background-color: #EBECEF;
+}

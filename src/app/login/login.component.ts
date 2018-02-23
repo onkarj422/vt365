@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit {
             } else if (this.data.noexists == "noexists") {
               console.log("User does not exist.");
             } else {
-              this.localStore.store('currentUserData', this.data);
-              console.log(this.localStore.retrieve('currentUserData'));
+              this.sessionStore.store('currentUserData', this.data);
+              console.log(this.sessionStore.retrieve('currentUserData'));
               this.session.start(this.data.userIs);
               let loc = "/"+this.data.userIs;
               window.location.replace(loc);
@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(private session: SessionService, private apiService: HttpApiService, private localStore: LocalStorageService) {
+  constructor(private session: SessionService, private apiService: HttpApiService, 
+    private localStore: LocalStorageService, private sessionStore: SessionStorageService) {
     this.form = new FormGroup({
       email: new FormControl('', Validators.compose([Validators.required, CustomValidators.email])),
       password: new FormControl('', Validators.required)  

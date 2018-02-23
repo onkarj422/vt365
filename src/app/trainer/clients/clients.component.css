@@ -1,0 +1,51 @@
+.avatar-image {
+	background-size: cover;
+    width: 50px;
+    height: 50px;
+    background-position: top center;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.client-info-container {
+	border-radius: 4px;
+	background-color: #ddffff;
+	font-weight: lighter;
+	padding: 10px;
+	width: 50%;
+}
+
+@media screen and (max-width: 850px) {
+	.client-info-container {
+		width: 100%;
+	}
+}
+
+.client-name {
+	text-transform: uppercase;
+	font-weight: 400;
+}
+
+.section-text {
+	color: #FF9A49;
+	font-weight: 500;
+}
+
+.large-text {
+	color: black;
+	opacity: 0.7;
+	font-weight: 400;
+}
+
+.in-panel-small-button {
+	color: #2fb0ea;
+	text-transform: uppercase;
+}
+
+.mat-form-field-ripple {
+  background-color: #2fb0ea !important;
+}
+
+.mat-focused .mat-form-field-label {
+  color: #2fb0ea !important;
+}

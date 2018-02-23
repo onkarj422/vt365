@@ -14,27 +14,23 @@ export class SessionService {
 
   sessionKey: string = "currentUserSession";
   dateFormat = require('dateformat');
+  sessionData = {};
   logStatus;
 
   public isActive() {
-  	return (!this.sessionStore.retrieve(this.sessionKey)) ? false : true;
+    let sessionData = this.sessionStore.retrieve(this.sessionKey);
+  	return (sessionData) ? true : false;
   }
 
   public start(whoIsIt) {
-    let data = this.localStore.retrieve('currentUserData');
-    console.log(data);
-    let sessionData = JSON.stringify({
-      "userIs": whoIsIt,
-      "email": data.email, 
-      timestamp: this.dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM TT")
-    });
+    let userData = this.sessionStore.retrieve('currentUserData');
+    this.sessionData['userIs'] = whoIsIt;
+    this.sessionData['email'] = userData.email;
+    this.sessionData['timestamp'] = this.dateFormat(new Date(), "mmm dd, yyyy HH:MM");
   	if (!this.isActive()) {
-  		this.sessionStore.store(this.sessionKey, sessionData);
-      let storeData = this.sessionStore.retrieve(this.sessionKey);
-  		console.log("I am session store, I got: "+storeData);
-      this.apiService.logEntry(sessionData).subscribe(
+  		this.sessionStore.store(this.sessionKey, this.sessionData);
+      this.apiService.logEntry(this.sessionData).subscribe(
         data => {
-          console.log(data);
           this.logStatus = data;
         },
         error => console.log("Error: "+error),
@@ -51,7 +47,6 @@ export class SessionService {
 
   public destroy() {
   	this.sessionStore.clear();
-    this.localStore.clear('currentUserData');
   	console.log("cleared");
   }
 

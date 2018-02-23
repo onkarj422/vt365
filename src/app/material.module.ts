@@ -14,7 +14,8 @@ import {
     MatIconModule, 
     MatRadioModule,
     MatSidenavModule,
-    MatStepperModule } from '@angular/material';
+    MatStepperModule,
+    MatSelectModule } from '@angular/material';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {
     MatIconModule,
     MatRadioModule,
     MatSidenavModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSelectModule
   ],
   exports: [
     MatButtonModule,
@@ -49,7 +51,8 @@ import {
     MatIconModule,
     MatRadioModule,
     MatSidenavModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSelectModule
   ],
   declarations: []
 })

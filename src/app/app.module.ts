@@ -11,14 +11,14 @@ import { TabsRouting } from './routing-tabs';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { RegisterComponent } from './register/register.component';
 import { CustomFormsModule } from 'ng4-validators'
 import { HttpModule } from "@angular/http";
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { SessionService } from './session.service';
 import { HttpApiService } from './http-service.service';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
-import {FileUploadModule} from 'primeng/primeng';
+import { RegisterclientComponent } from './registerclient/registerclient.component';
+import { RegistertrainerComponent } from './registertrainer/registertrainer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import {FileUploadModule} from 'primeng/primeng';
     AboutComponent,
     TabsRouting,
     LoginComponent,
-    RegisterComponent
+    RegisterclientComponent,
+    RegistertrainerComponent
   ],
   imports: [
     BrowserModule,
@@ -40,8 +41,7 @@ import {FileUploadModule} from 'primeng/primeng';
     CustomFormsModule,
     HttpModule,
     Ng2Webstorage,
-    ScrollToModule.forRoot(),
-    FileUploadModule
+    ScrollToModule.forRoot()
   ],
   providers: [HttpApiService, SessionService],
   bootstrap: [AppComponent]

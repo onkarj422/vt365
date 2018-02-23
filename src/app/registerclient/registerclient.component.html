@@ -1,0 +1,90 @@
+<div class="layout-container" fxLayout="column" fxLayoutAlign="center center">
+	<mat-card class="register-card" style="width: 500px;">
+	<mat-card-header>
+		<h1 style="font-size: 20px; color: whitesmoke;" mat-card-title>
+        	REGISTRATION FOR CLIENT
+      	</h1>
+	</mat-card-header>
+	<mat-card-content>
+		<form [formGroup]="form">
+			<div #imagecontainer>
+    						<label style="color: white;">Upload a photo</label><br>
+    						<div style="height: 20px;"></div>
+    						<input name="imageurl" class="hide" type="file" id="input-file-id" (change)="onSubmitImage()" accept=".png, .jpg, .jpeg" #avatar>
+    						<label for="input-file-id" style="background-color: #2fb0ea; color: white;" class="mat-button">Choose Image</label>
+						</div>
+						<div style="height: 10px;"></div>
+						<div fxLayout="row" fxLayoutGap="10px">
+							<mat-form-field style="width: 100%;">
+								<input matInput type="text" placeholder="First Name" name="firstname" formControlName="firstname">
+								<mat-error *ngIf="form.controls.firstname.errors?.required">This field is required!</mat-error>
+							</mat-form-field>
+							<mat-form-field style="width: 100%;">
+								<input matInput type="text" placeholder="Last Name" name="firstname" formControlName="lastname">
+								<mat-error *ngIf="form.controls.lastname.errors?.required">This field is required!</mat-error>
+							</mat-form-field>
+						</div>
+						<div fxLayout="row" fxLayoutGap="10px">
+							<div style="width: 50%;">
+								<p style="color: whitesmoke;">Gender :</p>
+								<mat-radio-group class="radio-buttons" fxLayout="row" fxLayoutGap="20px" name="gender" formControlName="gender">
+  									<mat-radio-button name="gender" value="male">Male</mat-radio-button>
+  									<mat-radio-button name="gender" value="female">Female</mat-radio-button>
+  								</mat-radio-group>
+							</div>
+							<mat-form-field style="width: 50%;">
+								<input matInput type="number" placeholder="Weight" name="weight" formControlName="weight">
+								<mat-error *ngIf="form.controls.weight.errors?.required">This field is required!</mat-error>
+							</mat-form-field>
+						</div>
+						
+						<br>
+						<div fxLayout="row" fxLayoutGap="10px">
+							<mat-form-field style="width: 100%;">
+								<input matInput type="number" name="age" placeholder="Age" formControlName="age">
+								<mat-error *ngIf="form.controls.age.errors?.required">This field is required!</mat-error>
+							</mat-form-field>
+							<mat-form-field style="width: 100%;">
+								<input matInput type="number" name="contact" placeholder="Conatct Number" formControlName="contact">
+								<mat-error *ngIf="form.controls.contact.errors?.required">This field is required!</mat-error>
+							</mat-form-field>
+						</div>
+						<br>
+						<div fxLayout="row" fxLayoutGap="10px">
+							<mat-form-field style="width: 100%;">
+								<textarea matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" matInput type="text" name="address" placeholder="Address" formControlName="address"></textarea>
+								<mat-error *ngIf="form.controls.address.errors?.required">This field is required!</mat-error>
+							</mat-form-field>
+							<mat-form-field style="width: 100%;">
+								<textarea matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" matInput type="text" name="bio" placeholder="Short Bio" formControlName="bio"></textarea>
+								<mat-error *ngIf="form.controls.bio.errors?.required">This field is required!</mat-error>
+							</mat-form-field>
+						</div>
+						<br>
+						<mat-form-field style="width: 50%;">
+							<input matInput type="email" name="email"  placeholder="Email" formControlName="email">
+							<mat-error *ngIf="form.controls.email.errors?.required">This field is required!</mat-error>
+							<mat-error *ngIf="form.controls.email.errors?.email">Please, enter a valid email address</mat-error>
+						</mat-form-field><br>
+						<div fxLayout="row" fxLayoutGap="10px">
+							<mat-form-field style="width: 50%;">
+								<input matInput type="password" name="password" placeholder="Password" formControlName="password">
+								<mat-error *ngIf="form.controls.password.errors?.required">Password is required!</mat-error>
+							</mat-form-field>
+							<mat-form-field style="width: 50%;">
+								<input matInput type="password" name="confirmPassword" placeholder="Confirm Password" formControlName="confirmPassword">
+								<mat-error *ngIf="form.controls.confirmPassword.errors?.equalTo">Password doesn't match!</mat-error>
+							</mat-form-field>
+						</div>			
+					</form>
+					<div style="height: 10px;"></div>
+					<button (click)="registerClient()" mat-raised-button style="color: white; background-color: #00bcd4; width: 100%;">REGISTER</button>
+					<div style="height: 10px;"></div>
+					<div fxLayout="row" fxLayoutGap="10px">
+						<button mat-raised-button style="color: white; background-color: #3B5998; width: 50%;"><i class="fa fa-facebook left"></i> Facebook</button>
+						<button mat-raised-button style="color: white; background-color: #DD4B39; width: 50%;"><i class="fa fa-google-plus left"></i> Google +</button>
+					</div>
+	</mat-card-content>
+</mat-card>
+
+</div>

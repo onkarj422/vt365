@@ -16,12 +16,11 @@ export class HttpApiService {
   	let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let options = new RequestOptions({ headers: headers }); 
   	return this.http.post(registerURL, dataSend, options)
-        .map((res: Response) => res.json())
-        .catch(this.handleError);
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
   }
 
   logEntry(data) {
-    console.log(data);
     let logUrl = this.url+"log_entry.php";
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let options = new RequestOptions({ headers: headers }); 
@@ -31,7 +30,6 @@ export class HttpApiService {
   }
 
   authorize(data): Observable<any> {
-    console.log(data);
     let authUrl = this.url+"authorize.php";
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let options = new RequestOptions({ headers: headers }); 
@@ -47,6 +45,42 @@ export class HttpApiService {
     return this.http
       .post(endpoint, formData, options)
       .map((res: Response) => res.text())
+      .catch((e) => this.handleError(e));
+  }
+
+  getData(whoIsIt): Observable<any> {
+    let getURL = this.url+"get_"+whoIsIt+"s.php";
+    return this.http.get(getURL)
+      .map((res: Response) => res.json());
+  }
+
+  assignToClient(data): Observable<any> {
+    let assignURL = this.url+"assign_values.php";
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http
+      .post(assignURL, data, options)
+      .map((res: Response) => res.json())
+      .catch((e) => this.handleError(e));
+  }
+
+  getTrainersClients(data) {
+    let endpoint = this.url+"get_trainers_clients.php";
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http
+      .post(endpoint, data, options)
+      .map((res: Response) => res.json())
+      .catch((e) => this.handleError(e));
+  }
+
+  getLog(data) {
+    let endpoint = this.url+"get_log.php";
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http
+      .post(endpoint, data, options)
+      .map((res: Response) => res.json())
       .catch((e) => this.handleError(e));
   }
 

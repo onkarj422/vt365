@@ -7,6 +7,13 @@ import { MaterialModule } from '../material.module';
 import { LandingComponent } from './landing/landing.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { SessionService } from '../session.service';
+import { HttpApiService } from '../http-service.service';
+import { Ng2Webstorage } from 'ngx-webstorage';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng4-validators'
+import { SignInComponent } from './landing/landing.component';
+import { RegisterComponent } from './landing/landing.component';
 
 @NgModule({
   imports: [
@@ -14,8 +21,13 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     RouterModule.forChild(routes),
     MaterialModule,
     ScrollToModule.forRoot(),
-    FlexLayoutModule
+    FlexLayoutModule,
+    Ng2Webstorage,
+    FormsModule, 
+    ReactiveFormsModule,
+    CustomFormsModule
   ],
-  declarations: [ClientAppComponent, LandingComponent]
+  declarations: [ClientAppComponent, LandingComponent, SignInComponent, RegisterComponent],
+  providers: [HttpApiService, SessionService]
 })
 export class ClientModule { }

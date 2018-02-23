@@ -1,0 +1,88 @@
+<div>
+	<mat-accordion>
+		<mat-expansion-panel *ngFor="let client of allClients; let timestamp of timestamps">
+			<mat-expansion-panel-header collapsedHeight="70px" style="height: 100px;">
+				<mat-panel-title>
+					<div class="avatar-image" [ngStyle]="{ 'background-image': 'url(' + client.imageurl + ')'}"></div>
+					<p class="client-name">{{client.firstname}} {{client.lastname}}</p>
+        		</mat-panel-title>
+			</mat-expansion-panel-header>
+			<div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center stretch" fxLayoutAlign.sm="center center" fxLayoutGap="5px">
+				<div class="client-info-container mat-body-1 mat-elevation-z3">
+					Last signed in: {{ client.timestamp | timeSince }} ago
+					<my-divider></my-divider>
+					<span class="section-text">Personal Details</span><br>
+					<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+						<span>
+							Contact No.<br>
+							E-mail     <br> 
+							Gender     <br> 
+							Age        <br>
+						</span>
+						<span style="font-weight: 400;">
+							: {{client.contact}}<br>
+							: {{client.email}}<br>
+							: {{client.gender}}<br>
+							: {{client.age}}
+						</span>
+					</div>
+					<my-divider></my-divider>
+					<span class="section-text">Physical Details</span><br>
+					<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+						<span>
+							Weight<br>
+							Height<br>						
+						</span>
+						<span style="font-weight: 400;">
+							: {{client.weight}}<br>
+							: {{client.height}}<br>
+						</span>
+					</div>
+				</div>
+				<div class="client-info-container mat-body-1 mat-elevation-z3">
+					<span class="section-text">Training Plan</span><br>
+					<span *ngIf="!isTrainingPlan">
+						<span class="large-text mat-title">No training plan</span><br>
+						Following options will help you create a training plan -
+						<div style="height: 10px;"></div>
+						<form [formGroup]="trainingForm">
+							<mat-form-field>
+								<input matInput type="number" name="weeks" placeholder="Number of weeks" formControlName="weeks">
+              					<mat-error *ngIf="trainingForm.controls.weeks.errors?.required || !trainingFormValid">This field is required!</mat-error>
+							</mat-form-field>
+							<mat-form-field>
+								<mat-select placeholder="Choose a workout" formControlName="workouts">
+    								<mat-option *ngFor="let workout of workoutsArray" [value]="workout.value">
+      									{{ workout.viewValue }}
+    								</mat-option>
+  								</mat-select>
+              					<mat-error *ngIf="trainingForm.controls.workouts.errors?.required || !trainingFormValid">Please choose a workout!</mat-error>
+              					<!--<mat-error *ngIf="workouts.hasError('required')">Please choose a workout</mat-error>-->
+							</mat-form-field>
+						</form>
+						<button (click)="createTrainingPlan()" style="float: right;" class="in-panel-small-button" mat-button>Create Training Plan</button> 
+					</span>
+					<div style="height: 20px;"></div>
+					<my-divider></my-divider>
+					<span class="section-text">Meal Plan</span><br>
+					<span *ngIf="!isMealPlan">
+						<span class="large-text mat-title">No meal plan</span><br>
+						Following options will help you create a meal plan -
+						<div style="height: 10px;"></div>
+						<form [formGroup]="mealForm">
+							<mat-form-field>
+								<mat-select placeholder="Choose a meal" formControlName="meals">
+    								<mat-option *ngFor="let meal of mealsArray" [value]="meal.value">
+      									{{ meal.viewValue }}
+    								</mat-option>
+  								</mat-select>
+  								<mat-error *ngIf="mealForm.controls.meals.errors?.required || !mealFormValid">Please choose a meal!</mat-error>
+							</mat-form-field>
+						</form>
+						<button (click)="createMealPlan()" style="float: right;" class="in-panel-small-button" mat-button>Create Meal Plan</button> 
+					</span>
+				</div>
+			</div>
+		</mat-expansion-panel>
+	</mat-accordion>
+</div>

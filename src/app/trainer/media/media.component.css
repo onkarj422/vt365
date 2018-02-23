@@ -1,0 +1,31 @@
+.section-title {
+	font-weight: lighter;
+}
+
+.card-title {
+	font-weight: 300;
+	color: #2fb0ea;
+}
+
+.snapshot-generator {
+  display: block;
+  height: 1px;
+  left: 0;
+  object-fit: contain;
+  position: fixed;
+  top: 0;
+  width: 1px;
+  z-index: -1;
+}
+
+.hide {
+  position: absolute;
+  z-index: 1000;
+  opacity: 0;
+  cursor: pointer;
+  right: 0;
+  top: 0;
+  height: 100%;
+  font-size: 24px;
+  width: 100%;
+}

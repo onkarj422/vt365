@@ -52,3 +52,52 @@
   background-color: white;
   opacity: 0.4;
 }
+
+.header-image {
+  background-size: cover;
+}
+
+.trainer-card {
+  max-width: 250px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.training-category-card {
+  max-width: 250px;
+  height: 250px;
+  cursor: pointer; 
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.big-button {
+  height: 40px;
+  width: 300px;
+  color: whitesmoke;
+  background-color: #2fb0ea; 
+}
+
+.hide {
+  display: none;
+}
+
+.mat-radio-outer-circle {
+  border-color: #b0b0b0;
+}
+
+.mat-form-field-ripple {
+  background-color: #2fb0ea !important;
+}
+
+.mat-focused .mat-form-field-label {
+  color: #2fb0ea !important;
+}
+
+.fab-next {
+  float: right; 
+  background-color: #2fb0ea; 
+  margin-right: 10px; 
+  margin-bottom: 10px;
+}

@@ -7,32 +7,60 @@
 		<mat-step [stepControl]="firstStep">
 			<ng-template matStepLabel>Choose Training Type(s)</ng-template>
 			<div fxLayout="row" fxLayoutAlign="center center" fxLayoutWrap="wrap" fxLayoutGap="10px">
-				<mat-card style="cursor: pointer;" (click)="isClicked[i] = !isClicked[i];" fxFlex *ngFor="let slide of slides;let i =index" [class.isSelected]="isClicked[i]">
+				<mat-card class="training-category-card" (click)="isClicked[i] = !isClicked[i];" fxFlex="25%" fxFlex.xs="75%" *ngFor="let slide of slides;let i =index" [class.isSelected]="isClicked[i]">
                     <mat-card-header>
-                    	<mat-card-title><p class="mat-title">{{slide.title}}</p></mat-card-title>
+                    	<mat-card-title>{{slide.title}}</mat-card-title>
                     </mat-card-header>
                     <img mat-card-image src="{{slide.img}}">
-                    <mat-card-actions>
-                    	<button style="color: #2fb0ea;" (click)="isClicked[i] = !isClicked[i];" mat-button>SELECT</button>
-                    </mat-card-actions>
                 </mat-card>
 			</div>
 			<div style="height: 50px;"></div>
-			<button (click)="selectTraining()" style="float: right; background-color: #2fb0ea;" mat-button matStepperNext>Next</button>
+			<button (click)="selectTraining()" class="fab-next" mat-fab matStepperNext><mat-icon style="color: white;">arrow_forward</mat-icon></button>
 		</mat-step>
 		<mat-step [stepControl]="secondStep">
 			<ng-template matStepLabel>Choose Trainer</ng-template>
-			<div>
-				
+			<div fxLayout="row" fxLayoutAlign="center center" fxLayoutWrap="wrap" fxLayoutGap="10px">
+				<mat-card class="trainer-card" fxFlex *ngFor="let trainer of allTrainers;let i =index" [class.isSelected]="selectedIndex === i" (click)="isSelected(i)" fxFlex="25%" fxFlex.xs="100%">
+                    <mat-card-header>
+                    	<div mat-card-avatar class="header-image" [ngStyle]="{ 'background-image': 'url(' + trainer.imageurl + ')'}"></div>
+                    	<mat-card-title>{{trainer.firstname}} {{trainer.lastname}}</mat-card-title>
+    					<mat-card-subtitle>{{trainer.email}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image src="{{trainer.imageurl}}">
+                    <mat-card-content>
+                    	<div class="mat-subheading-1">{{trainer.gender}}</div>
+                    	<div fxLayout="row">
+                    		<div class="mat-subheading-1"><b>Weight: </b>{{trainer.weight}}</div>
+                    		<div style="margin-left: auto;" class="mat-subheading-1"><b>Age: </b>{{trainer.age}}</div>
+                    	</div>
+						<div class="mat-subheading-1">{{trainer.bio}}</div>
+                    </mat-card-content>
+                </mat-card>
 			</div>
-			<button mat-button matStepperNext>Next</button>
+			<div style="height: 50px;"></div>
+			<button (click)="selectTrainer()" class="fab-next" mat-fab matStepperNext><mat-icon style="color: white;">arrow_forward</mat-icon></button>
 		</mat-step>
-		<mat-step [stepControl]="thirdStep">
-			<ng-template matStepLabel>Subscription & Payment</ng-template>
-			<div>
-				
+		<mat-step [stepControl]="form">
+			<ng-template matStepLabel>Registration</ng-template>
+			<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+				<button (click)="continueRegistration()" class="big-button" mat-raised-button>Continue With Registraton</button>
+				<h3 style="opacity: 0.6;"> - OR - </h3>
+				<button (click)="continueSignIn()" class="big-button" mat-raised-button>Sign In</button>
 			</div>
-			
+			<div style="height: 20px;"></div>
+			<div *ngIf="showSignIn" fxLayout="column" fxLayoutAlign="center center">
+				<form-signin></form-signin>
+			</div>
+			<div *ngIf="showRegister" fxLayout="column" fxLayoutAlign="center center">
+				<form-register></form-register>
+			</div>
+		</mat-step>
+		<mat-step [stepControl]="fourthStep">
+			<ng-template matStepLabel>Subscription & Payment</ng-template>
+			<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" style="height: 500px;">
+				<button (click)="paymentDone = true" class="big-button mat-elevation-z4" mat-raised-button matStepperNext>Pay</button>
+				<button *ngIf="paymentDone" (click)="startWorkout()" class="big-button mat-elevation-z4" mat-raised-button matStepperNext>Start Workout</button>
+			</div>
 		</mat-step>
 	</mat-horizontal-stepper>
 </div>
