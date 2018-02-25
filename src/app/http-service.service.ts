@@ -5,11 +5,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { User } from './apiuserdata.interface';
 import {HttpHeaders} from '@angular/common/http';
+import { SessionStorageService } from 'ngx-webstorage';
 
 @Injectable()
 export class HttpApiService {
 
-  private url = "http://localhost:4200/api/";
+  private url = "./api/";
 
   register(dataSend, whoIsIt): Observable<any> {
     let registerURL = this.url+"register_"+whoIsIt+".php";
@@ -84,6 +85,87 @@ export class HttpApiService {
       .catch((e) => this.handleError(e));
   }
 
+  getAllVideos(): Observable<any> {
+    let url = "./api/get_all_videos.php";
+    const formData = new FormData();
+    formData.append('trainerid', this.sessionStore.retrieve('currentUserData').trainerid);
+    let headers = new Headers();
+    let options = new RequestOptions({ headers: headers });
+    return this.http
+      .post(url, formData, options)
+      .map((response: Response) => response.json())
+      .catch((e) => this.handleError(e));
+  }
+
+  getAllImages(): Observable<any> {
+    let url = "./api/get_all_images.php";
+    const formData = new FormData();
+    formData.append('trainerid', this.sessionStore.retrieve('currentUserData').trainerid);
+    let headers = new Headers();
+    let options = new RequestOptions({ headers: headers });
+    return this.http
+      .post(url, formData, options)
+      .map((response: Response) => response.json())
+      .catch((e) => this.handleError(e));
+  }
+
+  createThumbnail(snapshotURL, formData) {
+    let thumbURL = "./api/create_thumbnail.php";
+    let headersForThumb = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let optionsForThumb = new RequestOptions({ headers: headersForThumb });
+    snapshotURL['formData'] = formData;
+    this.http
+      .post(thumbURL, snapshotURL, optionsForThumb)
+      .map((res: Response) => res.text())
+      .subscribe(data => {
+        if(data == "error") {
+          console.log("Error");
+        }
+    });
+  }
+
+   createMediaTable() {
+    let url = "./api/create_media_table.php";
+    const formData = new FormData();
+    formData.append('trainerid', this.sessionStore.retrieve('currentUserData').trainerid);
+    let headers = new Headers();
+    let options = new RequestOptions({ headers: headers });
+    this.http
+      .post(url, formData, options)
+      .map((response: Response) => response.text())
+      .subscribe(data => {
+        if (data == "noneed") {
+          return;
+        } else if(data == "error") {
+          window.alert("API couldn't recieve data to create media library database.");
+        } else {
+          console.log("Media table created!");
+        }
+      });
+  }
+
+  addWorkout(data): Observable<any> {
+    let url = "./api/add_workout.php";
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http
+      .post(url, data, options)
+      .map((res: Response) => res.text())
+      .catch((e) => this.handleError(e));
+  }
+
+  getWorkouts(): Observable<any> {
+    let url = "./api/get_workouts.php";
+    const formData = new FormData();
+    formData.append('trainerid', this.sessionStore.retrieve('currentUserData').trainerid);
+    let headers = new Headers();
+    let options = new RequestOptions({ headers: headers });
+    return this.http
+      .post(url, formData, options)
+      .map((res: Response) => res.json())
+      .catch((e) => this.handleError(e));
+  }
+
   private handleError(error: any) {
     let errMsg = (error.message) ? error.message :
     error.status ? `${error.status} - ${error.statusText}` : 'Server error';
@@ -91,6 +173,6 @@ export class HttpApiService {
   	return Observable.throw(error.statusText);
   }
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private sessionStore: SessionStorageService) { }
 
 }

@@ -1,0 +1,61 @@
+.panel-title {
+	text-transform: uppercase;
+	font-weight: 400;
+}
+
+.orange-text {
+	color: #FF9A49;
+	font-weight: 500;
+}
+
+.decription-container {
+	border-radius: 4px;
+	background-color: #ddffff;
+	font-weight: lighter;
+	padding: 10px;
+	width: 50%;
+}
+
+.add-button {
+	color: #2fb0ea;
+	text-transform: uppercase;
+}
+
+.mat-form-field-ripple {
+  background-color: #2fb0ea !important;
+}
+
+.mat-focused .mat-form-field-label {
+  color: #2fb0ea !important;
+}
+
+.add-button-main {
+	color: white;
+	background-color: #2fb0ea;
+	text-transform: uppercase;
+	float: right;
+}
+
+.isSelected {
+  background-color: white;
+  opacity: 0.4;
+}
+
+.modal {
+	 /* Hidden by default */
+     /* Stay in place */
+    /* Sit on top */
+    
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+}
+
+.modal-container {
+	display: none;
+	position: absolute;
+	z-index: 999999;
+	padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+}

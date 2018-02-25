@@ -261,7 +261,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild('imagecontainer') imagecontainer: ElementRef;
   form: FormGroup;
   isClient: string = "client";
-  uploadUrl: string = "http://localhost:4200/api/uploads/";
+  uploadUrl: string = "./api/uploads/";
   photo: string;
   clientData;
   registered: boolean = false;

@@ -1,3 +1,121 @@
-<p>
-  workouts works!
-</p>
+<div fxLayout="row" fxLayoutGap="220px">
+	<span class="section-title mat-display-2">Workouts</span>
+	<span>
+		<button (click)="isAddForm = !isAddForm;" class="add-button" mat-raised-button><mat-icon>add</mat-icon>Add workout</button>
+	</span>
+</div>
+<div>
+	<mat-accordion>
+		<div *ngIf="isAddForm" class="add-workout-form">
+			<form fxLayout="column" [formGroup]="workoutForm">
+				<div fxLayout="row" fxLayoutGap="5px">
+					<mat-form-field>
+					<input matInput type="text" name="workout" placeholder="Name of the workout" formControlName="workout">
+					<mat-error *ngIf="workoutForm.controls.workout.errors?.required">This field is required!</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+					<input matInput type="text" name="exercise" placeholder="Name of the exercise" formControlName="exercise">
+					<mat-error *ngIf="workoutForm.controls.exercise.errors?.required">This field is required!</mat-error>
+				</mat-form-field>
+				</div>
+				<div>
+					<mat-form-field>
+					<textarea matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" matInput type="text" name="description" placeholder="Description of workout" formControlName="description"></textarea>
+					<mat-error *ngIf="workoutForm.controls.description.errors?.required">This field is required!</mat-error>
+					<mat-hint>This field should specify clear instructions for the wrokout</mat-hint>
+					</mat-form-field>
+				</div>
+				<div style="height: 10px;"></div>
+				<div fxLayout="row" fxLayoutGap="5px">
+					<mat-form-field>
+					<input matInput type="number" name="reps" placeholder="Number of reps" formControlName="reps">
+					<mat-error *ngIf="workoutForm.controls.reps.errors?.required">This field is required!</mat-error>
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput type="number" name="sets" placeholder="Number of sets" formControlName="sets">
+					<mat-error *ngIf="workoutForm.controls.sets.errors?.required">This field is required!</mat-error>
+				</mat-form-field>
+				</div>
+				<div>
+					<label>Choose media to add here from your library</label><br>
+					<div fxLayout="row" fxLayoutGap="50px">
+						<div>
+							<span *ngIf="noImagesChosen" style="opacity: 0.5;" class="mat-headline">No images chosen</span>
+						</div>
+						<button (click)="showImagesChooser()" class="add-button" mat-button>Add Images</button>
+						<div style="height: 10px;"></div>
+					</div>
+					<div style="height: 20px;"></div>
+					<div fxLayout="row" fxLayoutGap="50px">
+						<div>
+							<span *ngIf="noVideosChosen" style="opacity: 0.5;" class="mat-headline">No videos chosen</span>
+						</div>
+						<button (click)="showVideoChooser()" class="add-button" mat-button>Add Videos</button>
+						<div style="height: 10px;"></div>
+					</div>
+				</div>
+			</form>
+			<div id="modal-card" class="modal-container">
+				<mat-card class="modal">
+						<span class="orange-text mat-headline">Choose Videos</span>
+						<mat-nav-list>
+							<mat-list-item *ngFor="let video of mediaVideos; let i = index" (click)="isClicked[i] = !isClicked[i];" [class.isSelected]="isClicked[i]">{{video.videoname}}</mat-list-item>
+						</mat-nav-list>
+						<mat-card-actions>
+							<button (click)="selectVideos()" style="color: #2fb0ea;" mat-button>OK</button>
+						</mat-card-actions>
+					</mat-card>
+			</div>
+			<div id="modal-images-card" class="modal-container">
+				<mat-card class="modal">
+						<span class="orange-text mat-headline">Choose Images</span>
+						<div *ngFor="let image of mediaImages; let i = index" fxLayout="row" fxLayoutGap="5px" fxLayoutWrap>
+							<img width="150px" height="150px" (click)="isClickedI[i] = !isClickedI[i];" [class.isSelected]="isClickedI[i]" src="{{image.imageurl}}">
+						</div>
+						<mat-card-actions>
+							<button (click)="selectImages()" style="color: #2fb0ea;" mat-button>OK</button>
+						</mat-card-actions>
+					</mat-card>
+			</div>
+			<button (click)="addWorkout()" class="add-button-main" mat-raised-button><mat-icon>add</mat-icon>Add</button>
+			<div style="height: 50px;"></div>
+		</div>
+		<div style="height: 20px;"></div>
+		<mat-expansion-panel *ngFor="let workout of allWorkouts">
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					<p class="panel-title">{{workout.workout}}</p>
+				</mat-panel-title>
+			</mat-expansion-panel-header>
+			<div>
+				<span class="orange-text">Exercise </span><span>: {{workout.exercise}}</span><br>
+				<div fxLayout="row" fxLayoutAlign="start center">
+					<span class="orange-text">Reps </span><span>: {{workout.reps}}</span><br>
+					<span class="orange-text">Sets </span><span>: {{workout.sets}}</span>
+				</div>
+				<div style="height: 20px;"></div>
+				<div class="description-container mat-body-1">
+					<p class="orange-text mat-display-1">Description</p>
+					{{workout.description}}
+				</div>
+				<div>
+					<span class="orange-text mat-display-1">Media</span><br>
+					<div fxLayout="column">
+						<span class="mat-headline">Videos</span>
+						<span *ngIf="noWorkoutVidoes" style="opacity: 0.5" class="mat-headline">No videos attached!</span>
+						<div *ngIf="!noWorkoutVideos">
+							<mat-nav-list>
+								<mat-list-item *ngFor="let onevideo of workoutVideos">{{workout.videonames.videourl}}</mat-list-item>
+							</mat-nav-list>
+						</div>
+						<span class="mat-headline">Images</span>
+						<span *ngIf="noWorkoutImages" style="opacity: 0.5" class="mat-headline">No images attached!</span>
+						<div fxLayout="row" fxLayoutGap="5px" fxLayoutWrap *ngIf="!noWorkoutImages">
+							<img *ngFor="let image of workoutImages" src="{{image.imageurl}}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</mat-expansion-panel>
+	</mat-accordion>
+</div>

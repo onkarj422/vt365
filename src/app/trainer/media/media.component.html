@@ -3,14 +3,49 @@
 <mat-card>
 	<span class="card-title mat-display-1">Videos</span>
 	<div style="height: 10px;"></div>
-	<div class="videos-container">Videos container</div>
+	<div class="media-container">
+		<div *ngIf="!isVideos" style="opacity: 0.5" class="mat-headline-2">No videos</div>
+		<mat-nav-list *ngIf="isVideos">
+   			<mat-list-item (click)="playVideo(ix)" *ngFor="let video of mediaVideos;let ix=index">{{video.videoname}}</mat-list-item>
+		</mat-nav-list>
+		<div id="video-modal-container" class="video-modal">
+			<span id="closebutton" (click)="hideVideo()" class="close">&times;</span>
+			<video id="modal-video" controls>
+  				<source type="video/mp4">				
+  			</video>
+		</div>
+	</div>
 	<div #imageuri>
 	</div>
+	<span class="card-title mat-display-1">Images</span>
+	<div style="height: 10px;"></div>
+	<div class="media-container"> 
+		<div *ngIf="!isImages" style="opacity: 0.5" class="mat-headline-2">No images</div>
+		<div fxLayout="row" fxLayoutWrap fxLayoutAlign="start center" fxLayoutGap="5px" *ngIf="isImages">
+			<div *ngFor="let image of mediaImages; let i=index">
+				<img (click)="openImage(i)" style="cursor: pointer;" id="myImg" width="150px" height="150px" src="{{image.imageurl}}" #img>
+				<div id="modalcontainer" class="modal-container">
+					<span id="closebutton" (click)="hideModal()" class="close">&times;</span>
+					<img id="modalimage" class="modal-image" #modal>
+					<div id="caption">{{image.imagename}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<mat-card-actions>
-		<button *ngIf="!uploading" #progress style="background-color: #2fb0ea; color: white; vertical-align: middle; cursor: pointer;" mat-raised-button><mat-icon style="margin-right: 5px;">add</mat-icon>Upload Video<input name="videourl" class="hide" type="file" id="input-file-id" (change)="onSubmitVideo()" accept=".mp4, .3gp" #video></button>
+		<button *ngIf="!uploading" #progress class="add-button" mat-raised-button>
+			<mat-icon style="margin-right: 5px;">add</mat-icon>
+			Upload Video
+			<input name="videourl" class="hide" type="file" id="input-file-id" (change)="onSubmitVideo()" accept=".mp4, .3gp" #video>
+		</button>
 		<div *ngIf="uploading">
   			Uploading video.. ({{uploadProgress}}%)
   		</div>
+  		<button class="add-button" mat-raised-button>
+  			<mat-icon style="margin-right: 5px;">add</mat-icon>
+  			Upload Image
+  			<input name="imageurl" class="hide" type="file" id="input-file-id" (change)="onSubmitImage()" accept=".jpg, .jpeg .png" #imageinput>
+  		</button>
 	</mat-card-actions>
 </mat-card>
 <canvas class="snapshot-generator" #canvasel></canvas>
